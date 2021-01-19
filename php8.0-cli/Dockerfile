@@ -1,7 +1,8 @@
-FROM php:8.0-rc-cli-alpine
+FROM php:8.0-cli-alpine
 
 # Install dependencies
 RUN apk add --no-cache \
+    autoconf \
     build-base  \
     gcc  \
     wget  \

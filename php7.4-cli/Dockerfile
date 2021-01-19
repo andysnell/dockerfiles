@@ -2,7 +2,6 @@ FROM php:7.4-cli-alpine
 
 # Install dependencies
 RUN apk add --no-cache \
-    autoconf \
     build-base  \
     gcc  \
     wget  \
