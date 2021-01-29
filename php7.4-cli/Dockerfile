@@ -2,6 +2,7 @@ FROM php:7.4-cli-alpine
 
 # Install dependencies
 RUN apk add --no-cache \
+    autoconf \
     build-base  \
     gcc  \
     wget  \
@@ -18,8 +19,9 @@ RUN apk add --no-cache \
     gmp-dev
 
 # Install extensions
-RUN docker-php-ext-install -j$(nproc) pdo_mysql zip exif bcmath pcntl gd gmp \
-     && pecl install ds && docker-php-ext-enable ds
+RUN docker-php-ext-install -j$(nproc) pdo_mysql zip exif bcmath pcntl gd gmp soap \
+    && pecl install ds \
+    && docker-php-ext-enable ds
 
 # Install composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -30,7 +32,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
         nesbot/carbon \
         laravel/installer \
         laravel-zero/installer \
-        icanhazstring/composer-unused \
     && composer clear-cache
 
 COPY .bashrc /root/.bashrc

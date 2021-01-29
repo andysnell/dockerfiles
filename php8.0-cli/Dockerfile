@@ -19,7 +19,9 @@ RUN apk add --no-cache \
     gmp-dev
 
 # Install extensions
-RUN docker-php-ext-install -j$(nproc) pdo_mysql zip exif bcmath pcntl gd gmp
+RUN docker-php-ext-install -j$(nproc) pdo_mysql zip exif bcmath pcntl gd gmp soap \
+    && pecl install ds \
+    && docker-php-ext-enable ds
 
 # Install composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
